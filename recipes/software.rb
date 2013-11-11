@@ -1,1 +1,1 @@
-%w(build-essential git git-core htop atop screen imagemagick vim openjdk-7-jre mailutils).map{|p| package p}
+%w(build-essential git git-core htop atop screen imagemagick vim openjdk-7-jre mailutils nodejs).map{|p| package p}
