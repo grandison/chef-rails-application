@@ -4,7 +4,7 @@ export RAILS_ENV=<%= node[:application][:environment] %>
 
 PATH=$PATH:/usr/local/bin
 APP_ROOT=<%= node[:application][:path] %>/current
-PID=<%= node[:application][:path] %>/current/tmp/pids/unicorn.pid
+PID=<%= node[:application][:path] %>/shared/pids/unicorn.pid
 CMD="bundle exec unicorn -c <%= node[:application][:path] %>/current/config/unicorn.rb -E <%= node[:application][:environment] %> -D"
 
 old_pid="$PID.oldbin"
@@ -20,7 +20,7 @@ oldsig () {
 }
 
 workersig () {
-  workerpid="/var/www/current/tmp/pids/unicorn.$2.pid"
+  workerpid="/var/www/shared/pids/unicorn.$2.pid"
   
   test -s "$workerpid" && kill -$1 `cat $workerpid`
 }

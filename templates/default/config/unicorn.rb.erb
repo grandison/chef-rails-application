@@ -10,7 +10,7 @@ GC.respond_to?(:copy_on_write_friendly=) and
 timeout 30
 listen '<%= node[:application][:socket] %>'
 
-pid               '<%= node[:application][:current_path] %>/tmp/pids/unicorn.pid'
+pid               '<%= node[:application][:current_path] %>/shared/pids/unicorn.pid'
 stderr_path       '<%= node[:application][:shared_path] %>/log/unicorn.stderr.log'
 stdout_path       '<%= node[:application][:shared_path] %>/log/unicorn.stdout.log'
 working_directory '<%= node[:application][:current_path] %>'
@@ -19,7 +19,7 @@ before_fork do |server, worker|
   defined?(ActiveRecord::Base) and
     ActiveRecord::Base.connection.disconnect!
 
-    old_pid = rails_root + '/tmp/pids/unicorn.pid.oldbin'
+    old_pid = '<%= node[:application][:current_path] %>/shared/pids/unicorn.pid.oldbin'
 
     if File.exists?(old_pid) && server.pid != old_pid
       begin
